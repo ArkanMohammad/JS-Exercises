@@ -152,3 +152,136 @@ const guesses = [10, 60, 42];
 for (let guess of guesses) {
     console.log(checkGuess(guess));
 }
+
+//Task38
+//Build a simple calculator function 
+//Write a function calculate(a, operator, b) that performs the operation and returns the result.
+// Support "+", "-", "*", "/". For division by 0, return "Error: division by zero".
+// For unknown operators, return "Error: unknown operator". 
+//Expected output: 15 | 6 | 50 | Error: division by zero 
+function calculate(a, operator, b) {
+    switch (operator) {
+        case "+":
+            return a + b;
+        case "-":
+            return a - b;
+        case "*":
+            return a * b;
+        case "/":
+            if (b === 0) {
+                return "Error: division by zero";
+            }
+            return a / b;
+        default:
+            return "Error: unknown operator";
+    }
+}
+console.log(calculate(10, "+", 5)); // 15
+console.log(calculate(10, "-", 4)); // 6
+console.log(calculate(10, "*", 5)); // 50
+console.log(calculate(10, "/", 0)); // Error: division by zero
+
+//Task39
+//Print a pyramid pattern 
+//Write a function pyramid(rows) that prints a centered star pyramid. For rows=5: 
+//* 
+//*** 
+//***** 
+//******* 
+//********* 
+function pyramid(rows) {
+    for (let i = 1; i <= rows; i++) {
+        let spaces = " ".repeat(rows - i);
+        let stars = "*".repeat(i * 2 - 1);
+        console.log(spaces + stars);
+    }
+}
+pyramid(5);
+//Task40
+//Collatz conjecture 
+//The Collatz conjecture: start with any positive integer n. 
+// If n is even → divide by 2. If n is odd → multiply by 3 and add 1.
+// Repeat until n = 1. Write a function collatz(n) that prints each step and returns the number of steps.
+// Expected output: collatz(6) → 6, 3, 10, 5, 16, 8, 4, 2, 1 — 8 steps 
+function collatz(n) {
+    let steps = 0;
+    while (n !== 1) {
+        console.log(n);
+        if (n % 2 === 0) {
+            n = n / 2;
+        } else {
+            n = n * 3 + 1;
+        }
+        steps++;
+    }
+    console.log(1);
+    return steps;
+}
+console.log("Steps:", collatz(6));
+
+//Task 41
+// Number to words (1–20)
+// Write a function numberToWord(n) that converts a number 1–20 to its English word.
+// Use an object or array lookup — no if/else chains.
+// Return "out of range" for anything outside 1–20. 
+//Expected output: numberToWord(7) → "seven" | numberToWord(15) → "fifteen" | numberToWord(25) → "out of range" 
+function numberToWord(n) {
+    const numberWords = {
+        1: "one",
+        2: "two",
+        3: "three",
+        4: "four",
+        5: "five",
+        6: "six",
+        7: "seven",
+        8: "eight",
+        9: "nine",
+        10: "ten",
+        11: "eleven",
+        12: "twelve",
+        13: "thirteen",
+        14: "fourteen",
+        15: "fifteen",
+        16: "sixteen",
+        17: "seventeen",
+        18: "eighteen",
+        19: "nineteen",
+        20: "twenty"
+    };
+    return numberWords[n] || "out of range";
+}
+console.log(numberToWord(7));   // seven
+console.log(numberToWord(15));  // fifteen
+console.log(numberToWord(25));  // out of range
+
+//Task42
+//FINAL — Mini bank account simulation 
+//Build a simple bank account simulation using functions and variables: 
+//• Start with balance = 1000 
+//• Write function deposit(amount): adds amount if > 0, else prints error 
+//• Write function withdraw(amount): subtracts if amount <= balance and > 0, else prints error • Write function getBalance(): returns current balance 
+//• Simulate: deposit 500, withdraw 200, withdraw 2000 (should fail), print final balance 
+//Expected output: Balance: 1000 → deposit 500 → 1500 → withdraw 200 → 1300 → withdraw 2000 FAILED → 1300 
+function deposit(amount) {
+    if (amount > 0) {
+        balance += amount;
+        console.log(`Deposit ${amount} → ${balance}`);
+    } else {
+        console.log("Error: invalid deposit amount");
+    }
+}
+function withdraw(amount) {
+
+    if (amount > 0 && amount <= balance) {
+        balance -= amount;
+        console.log(`Withdraw ${amount} → ${balance}`);
+    } else {
+        console.log(`Withdraw ${amount} FAILED`);
+    }
+}
+let balance = 1000;
+console.log(`Balance: ${balance}`);
+deposit(500);
+withdraw(200);
+withdraw(2000);
+console.log(balance);
