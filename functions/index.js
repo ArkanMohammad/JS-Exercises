@@ -1,3 +1,4 @@
+//function : A function is a reusable block of code that performs a specific task.
 //Task29
 //Write a temperature converter function 
 //Write a function celsiusToFahrenheit(c) that converts Celsius to Fahrenheit.
