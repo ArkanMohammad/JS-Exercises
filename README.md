@@ -1,6 +1,6 @@
 # JavaScript Exercises
 
-A collection of JavaScript exercises and practice problems created while learning JavaScript fundamentals.
+A collection of JavaScript exercises and practice problems solved during my Full Stack Development course at NewTech College.
 
 ## 📚 Topics Covered
 
@@ -16,9 +16,10 @@ A collection of JavaScript exercises and practice problems created while learnin
 - Array Methods
 - DOM Basics
 
-## 🚀 Purpose
+## 🚀 About This Repository
 
-This repository is made for practicing JavaScript concepts and improving problem-solving skills through small exercises and challenges.
+This repository contains JavaScript exercises that I solved while learning Full Stack Development at NewTech College.  
+The goal of these exercises is to improve programming logic, problem-solving skills, and JavaScript fundamentals.
 
 ## 🛠️ Technologies Used
 
@@ -27,34 +28,21 @@ This repository is made for practicing JavaScript concepts and improving problem
 - CSS3
 - VS Code
 
-## 📂 Project Structure
-
-```bash
-JS-Exercises/
-│
-├── arrays/
-├── functions/
-├── loops/
-├── objects/
-├── DOM/
-└── README.md
-```
-
-## 💡 What I Learned
+## 💡 Skills Practiced
 
 - Writing clean JavaScript code
 - Using functions and array methods
-- Solving logical problems
 - Working with loops and conditions
-- Understanding DOM manipulation basics
+- Understanding arrays and objects
+- Basic DOM manipulation
+- Problem solving
 
 ## ▶️ How to Run
 
-1. Clone the repository:
+1. Clone the repository
 
 ```bash
 git clone https://github.com/ArkanMohammad/JS-Exercises.git
-```
 
 2. Open the project in VS Code
 
