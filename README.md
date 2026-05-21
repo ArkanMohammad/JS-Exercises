@@ -43,23 +43,25 @@ The goal of these exercises is to improve programming logic, problem-solving ski
 
 ```bash
 git clone https://github.com/ArkanMohammad/JS-Exercises.git
+```
 
 2. Open the project in VS Code
 
 3. Run the files using:
 - Browser
-- Live Server extension
-- Node.js (for `.js` files)
+- Live Server
+- Node.js
 
-## 📌 Future Improvements
+## 📌 Future Plans
 
-- Add more advanced JavaScript exercises
-- Add mini projects
-- Improve code organization
-- Add explanations for each exercise
+- Add more JavaScript exercises
+- Build mini projects
+- Improve code structure
+- Add explanations and comments
 
 ## 👨‍💻 Author
 
 Created by Arkan Mohammad
 
-GitHub: https://github.com/ArkanMohammad
+GitHub:
+https://github.com/ArkanMohammad
