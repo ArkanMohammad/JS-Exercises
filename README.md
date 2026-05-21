@@ -14,7 +14,6 @@ A collection of JavaScript exercises and practice problems solved during my Full
 - Objects
 - String Methods
 - Array Methods
-- DOM Basics
 
 ## 🚀 About This Repository
 
@@ -24,8 +23,6 @@ The goal of these exercises is to improve programming logic, problem-solving ski
 ## 🛠️ Technologies Used
 
 - JavaScript (ES6)
-- HTML5
-- CSS3
 - VS Code
 
 ## 💡 Skills Practiced
@@ -34,7 +31,6 @@ The goal of these exercises is to improve programming logic, problem-solving ski
 - Using functions and array methods
 - Working with loops and conditions
 - Understanding arrays and objects
-- Basic DOM manipulation
 - Problem solving
 
 ## ▶️ How to Run
@@ -47,10 +43,7 @@ git clone https://github.com/ArkanMohammad/JS-Exercises.git
 
 2. Open the project in VS Code
 
-3. Run the files using:
-- Browser
-- Live Server
-- Node.js
+3. Run the files using Node.js or the browser console
 
 ## 📌 Future Plans
 
