@@ -111,7 +111,7 @@ const orders = [1, 4, 9, 11];
 //Create a function that prints all menu items in a clear format.
 //3 - Orange Juice - Drink - 12 NIS - Not Available 
 function displayMenu(){
-    menu.forEach(function(item){
+    menu.forEach((item)=>{
         let isAvailable;
         if(item.available){
             isAvailable = "Available";
@@ -125,7 +125,7 @@ displayMenu();
 //Create a function that returns only the items where available is true.  
 //Requirement: Use filter(). 
 function getAvailableItems(){
-    const availableItem =  menu.filter(function(item){
+    const availableItem =  menu.filter((item)=>{
         return item.available === true;
     });
     return availableItem;
@@ -136,7 +136,7 @@ console.log(getAvailableItems());
 //Requirement: Use find(). 
 function findItemById(id){
     //// Search inside the menu
-    const foundItem = menu.find(function(item){
+    const foundItem = menu.find((item)=>{
         return item.id === id;
     });
     if (foundItem){
@@ -155,9 +155,9 @@ console.log(findItemById(15));
 const order = [1, 3, 5];// Array of item IDs
 function getOrderItems(){
     //// Loop through each ID
-    return order.map(function(id){
+    return order.map((id)=>{
         // Search inside the menu
-        return menu.find(function(item){
+        return menu.find((item)=>{
             return item.id === id;
         });
     });
@@ -191,8 +191,8 @@ console.log(validateOrder());
 //Requirement: Use reduce(). 
 function calculateTotal(){
     //using reduce to calculate a one final value : total
-    let total = order.reduce(function(sum, id) {
-    let foundItem = menu.find(function(item) {
+    let total = order.reduce((sum, id)=>{
+    let foundItem = menu.find((item)=>{
       return item.id === id;
     });
     //Stores the total price into sum
