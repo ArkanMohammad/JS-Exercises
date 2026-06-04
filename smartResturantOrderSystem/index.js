@@ -167,23 +167,22 @@ console.log(getOrderItems());
 //✓ The item exists in the menu 
 //✓ The item is available (available === true)
 function validateOrder() {
-    //I can use order.map(function(id)...}
-    for(let i = 0; i < order.length; i++){
-        let foundItem = menu.find(function(item){
-            return item.id === order[i];
+    const results = order.map(function(id) {
+        let foundItem = menu.find(function(item) {
+            return item.id === id;
         });
-    // If item doesn't exist
-    if(!foundItem){
-        console.log("This item does not exist.");
-        return false;        
-    }
-    // If item exists but unavailable
-    if (!foundItem.available){
-        console.log("Sorry, this item is currently not available.");
-        return false;
-    }
-    }
-    return true;// Return true if all valid
+        if (!foundItem) {
+            console.log("This item does not exist.");
+            return false;
+        }
+        if (!foundItem.available) {
+            console.log("Sorry, this item is currently not available.");
+            return false;
+        }
+        return true;
+    });
+    //     return !results.includes(false);
+    return results.every(result => result === true);
 }
 console.log(validateOrder());
 //Function: calculateTotal()  
@@ -203,3 +202,247 @@ function calculateTotal(){
   console.log(`Total: ${total} NIS`);
   return total;
 }
+calculateTotal();
+//Function: applyDiscount()  
+//Apply discount rules to the total. Use only the biggest applicable discount:  
+//✓ Customer is a student → 10% discount 
+//✓ Total is more than 100 NIS → 15% discount 
+//✓ Total is more than 150 NIS → 20% discount 
+//✓ No rule applies → no discount
+//the function should return an object with:  
+//{  originalTotal: 120,  discountPercentage: 15,  discountAmount: 18,  finalTotal: 102,  } 
+function applyDiscount(total, isStudent) {
+    let discountPercentage = 0;
+    if (total > 150) {
+        discountPercentage = 20;
+    } else if (total > 100) {
+        discountPercentage = 15;
+    } else if (isStudent) {
+        discountPercentage = 10;
+    }
+    const discountAmount = total * discountPercentage / 100;
+    const finalTotal = total - discountAmount;
+    return {
+        originalTotal: total,
+        discountPercentage: discountPercentage,
+        discountAmount: discountAmount,
+        finalTotal: finalTotal
+    };
+}
+console.log(applyDiscount(140, false));
+console.log(applyDiscount(90, true));
+console.log(applyDiscount(190, true));
+//Function: canCustomerPay()  
+//Check if the customer's budget covers the final total.  
+//✓ If customer has enough money → return true 
+//✓ If not → return false 
+function canCustomerPay(budget, finalTotal) {
+    return budget >= finalTotal;
+}
+//Function: printReceipt() 
+//Print a complete receipt to the console. The receipt must include:  
+//✓ Restaurant name 
+//✓ Customer name 
+//✓ Ordered items with prices 
+//✓ Original total 
+//✓ Discount percentage 
+//✓ Discount amount 
+//✓ Final total 
+//✓ Customer budget 
+//✓ Payment status  
+//Expected output:  
+//========== RECEIPT ==========  
+//Restaurant: JavaScript Burger House  
+//Customer: Ahmad  
+//Items:  - Burger: 35 NIS  - Cola: 8 NIS  - Ice Cream: 15 NIS  
+//Original Total: 58 NIS  
+//Discount: 10%  
+//Discount Amount: 5.8 NIS  
+//Final Total: 52.2 NIS  
+//Customer Budget: 100 NIS  
+//Payment Status: Paid Successfully  
+//============================= 
+//Note: If the customer cannot pay, the Payment Status should be: Not Enough Money
+function printReceipt(customerName, order, discountInfo, budget) {
+
+    console.log("========== RECEIPT ==========");
+    console.log("Restaurant: JavaScript Burger House");
+    console.log("Customer: " + customerName);
+    console.log("Items:");
+
+    order.forEach(function(id) {
+        const item = menu.find(item => item.id === id);
+        console.log("- " + item.name + ": " + item.price + " NIS");
+    });
+
+    console.log("Original Total: " + discountInfo.originalTotal + " NIS");
+    console.log("Discount: " + discountInfo.discountPercentage + "%");
+    console.log("Discount Amount: " + discountInfo.discountAmount + " NIS");
+    console.log("Final Total: " + discountInfo.finalTotal + " NIS");
+    console.log("Customer Budget: " + budget + " NIS");
+
+    if (budget >= discountInfo.finalTotal) {
+        console.log("Payment Status: Paid Successfully");
+    } else {
+        console.log("Payment Status: Not Enough Money");
+    }
+
+    console.log("=============================");
+}
+const myOrder = [1, 5, 7];
+const discountInfo = {
+    originalTotal: 97,
+    discountPercentage: 10,
+    discountAmount: 9.7,
+    finalTotal: 87.3
+};
+printReceipt("Arkan", myOrder, discountInfo, 100);
+//At the end of your file, connect all functions together in this order: 
+//Step  Action 
+//1  Display the full menu 
+//2  Display only available items 
+//3  Convert order IDs into full item objects 
+//4  Validate the order 
+//5a  If valid: calculate total → apply discount → check budget → print receipt 
+//5b  If invalid: stop the order and print a clear error message
+// 1. Display full menu
+displayMenu();
+// 2. Display available items
+console.log(getAvailableItems());
+// 3. Convert order IDs to full objects
+const orderedItems = getOrderItems();
+// 4. Validate order
+if (validateOrder()) {
+    // 5a. Calculate total
+    const total = calculateTotal();
+    // Apply discount
+    const discountInfo = applyDiscount(total, customer.isStudent);
+    // Check budget
+    const canPay = canCustomerPay(
+        customer.budget,
+        discountInfo.finalTotal
+    );
+    // Print receipt
+    printReceipt(
+        customer.name,
+        order,
+        discountInfo,
+        customer.budget
+    );
+} else {
+    // 5b. Invalid order
+    console.log("Order failed. Please check unavailable or invalid items.");
+}
+//Create a function called countItemsByCategory() that counts how many ordered items belong to 
+//each category.  
+//Requirement: Use reduce(). 
+// Expected output:  
+//{  
+//Food: 2,  
+//Drink: 1,  
+//Dessert: 1  
+//} 
+function countItemsByCategory() {
+    return order.reduce(function(counts, id) {
+
+        const item = menu.find(function(item) {
+            return item.id === id;
+        });
+        counts[item.category] = (counts[item.category] || 0) + 1;
+        return counts;
+    }, {});
+}
+console.log(countItemsByCategory());
+//Create a function called getMostExpensiveItem() that returns the most expensive item in the 
+//customer's order.  
+// Expected output:  
+//Most expensive item: Pizza - 50 NIS 
+function getMostExpensiveItem() {
+    const items = getOrderItems();
+
+    return items.reduce((mostExpensive, item) =>
+        item.price > mostExpensive.price ? item : mostExpensive
+    );
+}
+const expensiveItem = getMostExpensiveItem();
+console.log(
+    `Most expensive item: ${expensiveItem.name} - ${expensiveItem.price} NIS`
+);
+//Change the order structure to include quantities, then update your total calculation:  
+// New order structure:  
+//const order = [  
+//{ id: 1, quantity: 2 },  
+//{ id: 3, quantity: 1 },  
+//{ id: 5, quantity: 3 },  
+//];  
+// Expected total calculation:  
+//Burger x2 = 70  
+//Cola x1 = 8 
+//Ice Cream x3 = 45  
+//Total = 123
+const order1 = [
+    { id: 1, quantity: 2 },
+    { id: 3, quantity: 1 },
+    { id: 5, quantity: 3 }
+];
+function newCalculateTotal() {
+    const total = order1.reduce((sum, orderItem) => {
+        const item = menu.find(item => item.id === orderItem.id);
+        const itemTotal = item.price * orderItem.quantity;
+        console.log(
+            `${item.name} x${orderItem.quantity} = ${itemTotal} NIS`
+        );
+        return sum + itemTotal;
+    }, 0);
+    console.log(`Total = ${total} NIS`);
+    return total;
+}
+newCalculateTotal();
+//Add a variable called orderStatus and update it based on the result:  
+//✓ Order invalid → Rejected 
+//✓ Order valid, customer cannot pay → Rejected 
+//✓ Order valid, customer can pay → Paid 
+//let orderStatus = "Pending";  
+// Update to one of:  
+//"Pending" | "Approved" | "Rejected" | "Paid"
+const newMenu = [
+    { id: 1, name: "Burger", price: 25 },
+    { id: 2, name: "Pizza", price: 40 },
+    { id: 3, name: "Salad", price: 20 },
+    { id: 4, name: "Pasta", price: 35 },
+    { id: 5, name: "Sandwich", price: 15 }
+];
+const newOrder = [
+    { id: 1, quantity: 2 },
+    { id: 3, quantity: 1 },
+    { id: 5, quantity: 3 }
+];
+const customerBudget = 100;
+let orderStatus = "Pending";
+function UpdatedCalculateTotal() {
+    const isValidOrder = newOrder.every(orderItem => 
+        newMenu.find(item => item.id === orderItem.id)
+    );
+    if (!isValidOrder) {
+        orderStatus = "Rejected";
+        console.log("Order invalid → Rejected");
+        return 0;
+    }
+    const total = order1.reduce((sum, orderItem) => {
+        const item = newMenu.find(item => item.id === orderItem.id);
+        const itemTotal = item.price * orderItem.quantity;
+        console.log(`${item.name} x${orderItem.quantity} = ${itemTotal} NIS`);
+        return sum + itemTotal;
+    }, 0);
+    console.log(`Total = ${total} NIS`);    
+    if (total > customerBudget) {
+        orderStatus = "Rejected";
+        console.log("Order valid, customer cannot pay → Rejected");
+    } else {
+        orderStatus = "Paid";
+        console.log("Order valid, customer can pay → Paid");
+    }
+    console.log(`Order Status: ${orderStatus}`);
+    return total;
+}
+UpdatedCalculateTotal();
