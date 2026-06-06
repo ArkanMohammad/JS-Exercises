@@ -49,7 +49,7 @@ console.log(account.getBalance()); // still 50
 //Part 5
 account.balance = -1000;
 console.log(account.getBalance());//50
-/*account.balance = -1000 creates a new public property called balance.
-The real balance is stored in #balance.
-getBalance() returns #balance, which is still 50.*/
+/*account.balance = -1000 creates a new public property called balance
+The real balance is stored in #balance
+getBalance() returns #balance, which is still 50*/
 console.log(account.balance);//-1000
