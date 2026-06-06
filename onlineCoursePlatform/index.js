@@ -21,7 +21,7 @@ class Course {
 //Part 3 Create Course Instances
 const jsCourse = new Course("JavaScript Basics", "Dania", 30);
 const pythonCourse = new Course("Python Fundamentals", "Mohammad", 25);
-console.log(`${jsCourse}`);
+console.log(`${jsCourse}`); // console.log(jsCourse.toString());
 console.log(`${pythonCourse}`);
 //Part 4 Use the Instances
 //Add students to the JavaScriptBasics Course
