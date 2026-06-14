@@ -1,4 +1,15 @@
 /*
+SHOW DATA OF DOM TREE IN CONSOLE OF BROWSER:-
+console.log(document.documentElement);
+console.dir(document.documentElement);
+console.log(document.body);
+console.dir(document.body);
+console.log(document.querySelectorAll("*"));
+document.querySelectorAll("*").forEach(el => {
+  console.log(el.tagName);
+});
+*/
+/*
 Task 1: The Like Button 
 The like button should count how many times it has been pressed.
 Every click adds one to the counter and updates the likeCount paragraph.
@@ -82,4 +93,51 @@ keyInput.addEventListener("keydown", function (event) {
   }
   keyText += event.key;
   keyLog.textContent = keyText;
+});
+/*
+Task 5: The Task Delegator Hard
+Using a single event listener on the taskList -- not one listener per item -- make each list
+item strike through when clicked. Clicking it again removes the strikethrough. Also listen for
+a double-click on the list: if the user double-clicks any item, remove it. New items added to
+the list later must work with the same listeners -- no re-binding.
+*/
+const taskList = document.getElementById("taskList");
+taskList.addEventListener("click", function (event) {
+  if (event.target.tagName === "LI") {
+        if (event.target.style.textDecoration === "line-through") {
+            event.target.style.textDecoration = "none";
+        } else {
+            event.target.style.textDecoration = "line-through";
+        }
+    }
+});
+taskList.addEventListener("dblclick", function (event) {
+    if (event.target.tagName === "LI") {
+        event.target.remove();
+    }
+});
+/*
+Task 6: The Smart Form Hard
+submit preventDefault validation e.target
+When contactForm is submitted, stop the page from reloading. Check that both emailInput
+and subjectInput have values. If either is empty, show "Please fill in all fields." in formStatus
+in red. If both are filled, show "Message sent to [email]!" in green, clear both fields, and
+remove the error styling. Use e.target to access the form fields instead of selecting them
+separately.
+*/
+const contactForm = document.getElementById("contactForm");
+const formStatus = document.getElementById("formStatus");
+contactForm.addEventListener("submit", function (event) {
+  event.preventDefault();//stop the page from reloading
+  const emailInput = event.target.emailInput.value;
+  const subjectInput = event.target.subjectInput.value;
+  if(emailInput === "" || subjectInput === ""){
+    formStatus.textContent = "Please fill in all fields.";
+    formStatus.style.color = "red";
+  } else if (emailInput !== "" && subjectInput !== ""){
+    formStatus.textContent = `Message sent to ${emailInput}!`;
+    formStatus.style.color = "green";
+    event.target.emailInput.value = "";
+    event.target.subjectInput.value = "";
+  }
 });
